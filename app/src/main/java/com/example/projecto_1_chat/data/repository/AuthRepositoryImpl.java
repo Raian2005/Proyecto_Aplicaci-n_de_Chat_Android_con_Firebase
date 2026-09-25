@@ -3,12 +3,9 @@ package com.example.projecto_1_chat.data.repository;
 import com.example.projecto_1_chat.domain.model.User;
 import com.example.projecto_1_chat.domain.repository.AuthCallback;
 import com.example.projecto_1_chat.domain.repository.AuthRepository;
-import com.google.firebase.Firebase;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
 
 public class AuthRepositoryImpl implements AuthRepository {
 
@@ -26,9 +23,9 @@ public class AuthRepositoryImpl implements AuthRepository {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if(task.isSuccessful()){
-                        FirebaseUser firabaseUser = mAuth.getCurrentUser();
-                        if(firabaseUser != null){
-                            User user = new User(firabaseUser.getUid(), "", firabaseUser.getEmail(), "");
+                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                        if(firebaseUser != null){
+                            User user = new User(firebaseUser.getUid(), "", firebaseUser.getEmail(), "");
                             callback.onSuccess(user);
                         }
                     } else {
