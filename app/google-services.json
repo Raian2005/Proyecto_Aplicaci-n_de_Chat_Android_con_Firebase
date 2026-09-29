@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "783953116091",
+    "firebase_url": "https://project-1-prog-mobile-default-rtdb.firebaseio.com",
+    "project_id": "project-1-prog-mobile",
+    "storage_bucket": "project-1-prog-mobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783953116091:android:6205f177945ceb0279a29e",
+        "android_client_info": {
+          "package_name": "com.example.projecto_1_chat"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcNAcyjhY5p12MPmD2zHzDF9CYhd7L9Ig"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
