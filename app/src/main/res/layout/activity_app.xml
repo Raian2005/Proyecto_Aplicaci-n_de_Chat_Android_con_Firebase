@@ -24,24 +24,67 @@
         app:title="ChatApp"
         app:titleMargin="4dp"
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
-        app:titleTextColor="#FDFDFD" />
+        app:titleTextColor="#FDFDFD"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewChats" />
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarClickLogout"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/materialToolbar"
         android:layout_width="0dp"
-        android:layout_height="32dp"
-        android:background="#2196F3"
-        android:clickable="true"
+        android:layout_height="72dp"
+        android:background="#000000"
         android:minHeight="?attr/actionBarSize"
-        android:paddingStart="150dp"
         android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/chats"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chatsButton"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#4B8142"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar"
+        app:layout_constraintEnd_toStartOf="@+id/agregarChat"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toStartOf="@+id/materialToolbar"
+        app:layout_constraintTop_toTopOf="@+id/materialToolbar" />
+
+    <Button
+        android:id="@+id/agregarChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/agregarChat"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#4B8142"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar"
+        app:layout_constraintEnd_toStartOf="@+id/cerrarSesion"
+        app:layout_constraintStart_toEndOf="@+id/chats"
+        app:layout_constraintTop_toTopOf="@+id/materialToolbar" />
+
+    <Button
+        android:id="@+id/cerrarSesion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cerrarSesion"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#4B8142"
+        app:layout_constraintBottom_toBottomOf="@+id/materialToolbar"
+        app:layout_constraintEnd_toEndOf="@+id/materialToolbar"
+        app:layout_constraintStart_toEndOf="@+id/agregarChat"
+        app:layout_constraintTop_toTopOf="@+id/materialToolbar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewChats"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        app:subtitleTextColor="#FFFEFE"
-        app:title="Cerrar Sesion"
-        app:titleTextAppearance="@style/TextAppearance.AppCompat.Medium"
-        app:titleTextColor="#FFFFFF" />
+        app:layout_constraintBottom_toTopOf="@+id/materialToolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
