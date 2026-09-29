@@ -64,6 +64,11 @@ public class AuthRepositoryImpl implements AuthRepository {
     }
 
     @Override
+    public void logout() {
+        mAuth.signOut();
+    }
+
+    @Override
     public String getCurrentUserId() {
 
         if(isUserLoggedIn()){

@@ -7,5 +7,7 @@ public interface AuthRepository {
 
     boolean isUserLoggedIn();
 
+    void logout();
+
     String getCurrentUserId();
 }

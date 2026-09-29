@@ -27,6 +27,12 @@ public class Login extends AppCompatActivity {
 
         loginViewModel = new LoginViewModel();
 
+        if(loginViewModel.isUserLoggedIn()){
+            Intent intent = new Intent(Login.this, App.class);
+            startActivity(intent);
+            finish();
+        }
+
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -49,7 +55,7 @@ public class Login extends AppCompatActivity {
     private void Observers(){
         loginViewModel.getIsLoginSuccess().observe(this, result -> {
             if(result != null && result){
-                Intent intent = new Intent(Login.this, Chat.class);
+                Intent intent = new Intent(Login.this, App.class);
                 startActivity(intent);
                 finish();
             }

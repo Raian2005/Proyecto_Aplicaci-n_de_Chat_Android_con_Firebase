@@ -80,6 +80,14 @@ public class LoginViewModel extends ViewModel {
         });
     }
 
+    public boolean isUserLoggedIn(){
+        return authRepository.isUserLoggedIn();
+    }
+
+    public void logout(){
+        authRepository.logout();
+    }
+
 
 
 
