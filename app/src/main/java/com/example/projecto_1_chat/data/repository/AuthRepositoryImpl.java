@@ -50,6 +50,8 @@ public class AuthRepositoryImpl implements AuthRepository {
                            mFirestore.collection("users").document(uid).set(user)
                                    .addOnSuccessListener(aVoid -> callback.onSuccess(user))
                                    .addOnFailureListener(e -> callback.onError(e.getMessage()));
+                       } else {
+                           callback.onError("No se pudo obtener el usuario despues del registro");
                        }
                    } else {
                        String error = task.getException() != null ? task.getException().getMessage() : "Error al registrar el usuario";
