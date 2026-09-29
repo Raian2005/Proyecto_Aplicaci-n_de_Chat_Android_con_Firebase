@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Projecto_1_chat</string>
+    <string name="chatsButton">Chats</string>
+    <string name="agregarChat">Agregar Chat</string>
+    <string name="cerrarSesion">Cerrar Sesión</string>
+    <string name="crearChat">Crear Chat</string>
 </resources>
