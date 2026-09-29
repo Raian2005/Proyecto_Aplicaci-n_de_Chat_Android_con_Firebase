@@ -38,7 +38,7 @@ public class Login extends AppCompatActivity {
 
         Observers();
 
-        binding.buttonLogin.setOnClickListener(v -> {
+        binding.crearChat.setOnClickListener(v -> {
             String email = binding.editTextTextEmailLogin.getText().toString().trim();
             String password = binding.editTextTextPasswordLogin.getText().toString().trim();
 

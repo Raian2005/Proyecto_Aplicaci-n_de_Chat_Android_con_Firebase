@@ -84,6 +84,10 @@ public class LoginViewModel extends ViewModel {
         return authRepository.isUserLoggedIn();
     }
 
+    public String getCurrentUserId() {
+        return authRepository.getCurrentUserId();
+    }
+
     public void logout(){
         authRepository.logout();
     }
