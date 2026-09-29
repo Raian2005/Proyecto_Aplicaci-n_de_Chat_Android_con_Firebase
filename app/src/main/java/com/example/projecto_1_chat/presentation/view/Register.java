@@ -41,7 +41,7 @@ public class Register extends AppCompatActivity {
     private void Observers(){
         loginViewModel.getIsLoginSuccess().observe(this, result -> {
             if(result != null && result){
-                Intent intent = new Intent(Register.this, Chat.class);
+                Intent intent = new Intent(Register.this, App.class);
                 startActivity(intent);
                 finish();
             }
