@@ -3,6 +3,9 @@ package com.example.projecto_1_chat.presentation.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,13 +29,26 @@ public class App extends AppCompatActivity {
         loginViewModel = new LoginViewModel();
         chatListViewModel = new ChatListViewModel();
 
+        androidx.activity.EdgeToEdge.enable(this);
+
         binding = ActivityAppBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+
+
 
         ChatAdapter chatAdapter = new ChatAdapter(
                 loginViewModel.getCurrentUserId(),
                 chat -> {
-                //aqui va la logica del boton de cada chat cuando este ready
+                    Intent intent = new Intent(App.this, ChatMessage.class);
+                    intent.putExtra("chatId", chat.getId());
+                    intent.putExtra("otherUserName", chat.getOtherUserName());
+                    startActivity(intent);
                 }
         );
         binding.recyclerViewChats.setLayoutManager(new LinearLayoutManager(this));
@@ -64,6 +80,8 @@ public class App extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
+
 
     }
 }
