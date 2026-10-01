@@ -64,6 +64,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         );
 
         holder.itemView.setOnClickListener(v -> listener.onChatClick(chat));
+        holder.binding.constraintItemChat.setOnClickListener(v -> listener.onChatClick(chat));
+        holder.binding.textViewNameChat.setOnClickListener(v -> listener.onChatClick(chat));
+        holder.binding.textViewLastMessage.setOnClickListener( v -> listener.onChatClick(chat));
     }
 
     @Override
