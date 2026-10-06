@@ -5,11 +5,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/chat_background"
     tools:context=".presentation.view.ChatMessage">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarChatMessage"
-        android:layout_width="409dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#4B8142"
         android:minHeight="?attr/actionBarSize"
@@ -20,7 +21,41 @@
         app:subtitleTextAppearance="@style/TextAppearance.AppCompat.Small"
         app:subtitleTextColor="#FFFFFF"
         app:titleTextAppearance="@style/TextAppearance.AppCompat.Large"
-        app:titleTextColor="#FFFFFF" />
+        app:titleTextColor="#FFFFFF">
+
+        <LinearLayout
+            android:id="@+id/chatToolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start|center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="true">
+
+                <ImageView
+                    android:id="@+id/imageViewChatProfile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/outline_account_circle_24" />
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textViewChatTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewMessage"
@@ -34,12 +69,17 @@
     <EditText
         android:id="@+id/editTextMessageSendInput"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="6dp"
         android:ems="10"
-        android:fontFamily="sans-serif-black"
         android:inputType="text"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:textColor="#000000"
+        android:background="@drawable/background_message_input"
+        android:hint="Escribe un mensaje..."
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="?attr/colorOnSurface"
+        android:textColorHint="?attr/colorOnSurfaceVariant"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonSelectImage"
@@ -47,23 +87,32 @@
 
     <Button
         android:id="@+id/buttonSendMessage"
-        android:layout_width="69dp"
-        android:layout_height="49dp"
-        android:background="#D9C5C5"
-        android:backgroundTint="#788BC34A"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/background_message_button"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="8dp"
+        android:stateListAnimator="@null"
         app:icon="@drawable/outline_arrow_right_alt_24"
-        app:iconSize="35dp"
+        app:iconSize="28dp"
         app:iconTint="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/buttonSelectImage"
-        android:layout_width="72dp"
-        android:layout_height="0dp"
-        android:background="#A25656"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="6dp"
+        android:background="@drawable/background_message_button"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:padding="9dp"
+        android:stateListAnimator="@null"
         app:icon="@drawable/outline_image_24"
-        app:iconSize="30dp"
+        app:iconSize="26dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonSendMessage"
         app:layout_constraintTop_toTopOf="@+id/buttonSendMessage" />
