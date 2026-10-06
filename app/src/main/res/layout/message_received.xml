@@ -23,7 +23,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Texto del mensaje -->
+        <!-- Foto del mensaje recibido -->
+        <ImageView
+            android:id="@+id/imageMessageReceived"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_marginBottom="4dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/textMessageReceived"
             android:layout_width="wrap_content"

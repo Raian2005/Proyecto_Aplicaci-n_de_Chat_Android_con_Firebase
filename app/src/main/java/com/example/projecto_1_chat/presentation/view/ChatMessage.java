@@ -1,8 +1,13 @@
 package com.example.projecto_1_chat.presentation.view;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -16,6 +21,7 @@ import com.example.projecto_1_chat.R;
 import com.example.projecto_1_chat.databinding.ActivityChatMessageBinding;
 import com.example.projecto_1_chat.databinding.ActivityCreatechatBinding;
 import com.example.projecto_1_chat.presentation.adapter.ChatMessageAdapter;
+import com.example.projecto_1_chat.presentation.utils.ImageBase64;
 import com.example.projecto_1_chat.presentation.viewmodel.ChatMessageViewModel;
 import com.example.projecto_1_chat.presentation.viewmodel.LoginViewModel;
 
@@ -77,5 +83,26 @@ public class ChatMessage extends AppCompatActivity {
             }
         });
 
+        binding.buttonSelectImage.setOnClickListener(v -> {
+            selectImageGallery.launch("image/*");
+        });
+
     }
+
+    private final ActivityResultLauncher<String> selectImageGallery =
+            registerForActivityResult(new ActivityResultContracts.GetContent(), uri -> {
+                if(uri != null){
+                    try {
+                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), uri);
+                        String base64Image = ImageBase64.bitmapToBase64(bitmap);
+
+                        String chatId = getIntent().getStringExtra("chatId");
+                        String currentUserId = loginViewModel.getCurrentUserId();
+
+                        chatMessageViewModel.sendImageMessage(chatId, currentUserId, base64Image);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 }

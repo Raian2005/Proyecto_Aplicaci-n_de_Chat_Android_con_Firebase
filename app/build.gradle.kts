@@ -34,6 +34,13 @@ android {
     buildFeatures{
         viewBinding = true
     }
+
+    packaging{
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/DEPENDENCIES"
+        }
+    }
 }
 
 dependencies {
@@ -46,6 +53,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
+    implementation("com.google.auth:google-auth-library-oauth2-http:1.19.0")
     implementation(platform(libs.firebaseBom))
     implementation(libs.firebaseAuth)
     implementation(libs.firebaseStorage)

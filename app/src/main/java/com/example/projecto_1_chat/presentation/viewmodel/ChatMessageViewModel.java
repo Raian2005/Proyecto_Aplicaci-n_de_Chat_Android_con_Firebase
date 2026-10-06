@@ -62,6 +62,25 @@ public class ChatMessageViewModel extends ViewModel {
         });
     }
 
+    public void sendImageMessage(String chatId, String senderId, String base64Image){
+        if(base64Image == null || base64Image.trim().isEmpty()){
+            errorMessage.setValue("El mensaje debe contener");
+            return;
+        }
+
+        messageRepository.sendImageMessage(chatId, senderId, base64Image, new MessageCallback() {
+            @Override
+            public void onSuccess(List<Message> messages) {
+
+            }
+
+            @Override
+            public void onError(String error) {
+                errorMessage.setValue(error);
+            }
+        });
+    }
+
     @Override
     protected void onCleared(){
         messageRepository.removeMessagesLister();

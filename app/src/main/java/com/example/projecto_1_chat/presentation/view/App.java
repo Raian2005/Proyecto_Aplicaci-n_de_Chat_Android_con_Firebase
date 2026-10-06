@@ -1,8 +1,15 @@
 package com.example.projecto_1_chat.presentation.view;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -10,7 +17,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.projecto_1_chat.data.service.NotificationMessagingService;
 import com.example.projecto_1_chat.databinding.ActivityAppBinding;
+import com.example.projecto_1_chat.domain.model.Chat;
 import com.example.projecto_1_chat.presentation.adapter.ChatAdapter;
 import com.example.projecto_1_chat.presentation.viewmodel.ChatListViewModel;
 import com.example.projecto_1_chat.presentation.viewmodel.LoginViewModel;
@@ -34,6 +43,24 @@ public class App extends AppCompatActivity {
         binding = ActivityAppBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        com.google.firebase.messaging.FirebaseMessaging.getInstance().getToken()
+                .addOnSuccessListener( token -> {
+                    String currentUserId = loginViewModel.getCurrentUserId();
+                    if(currentUserId != null && token != null){
+
+                        com.google.firebase.firestore.FirebaseFirestore.getInstance()
+                                .collection("users")
+                                .document(currentUserId)
+                                .update("token", token);
+                    }
+                });
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if(ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
+            }
+        }
+
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -54,7 +81,26 @@ public class App extends AppCompatActivity {
         binding.recyclerViewChats.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerViewChats.setAdapter(chatAdapter);
 
-        chatListViewModel.getChats().observe(this, chatAdapter::setChats);
+        chatListViewModel.getChats().observe(this, chats -> {
+            chatAdapter.setChats(chats);
+
+            if(chats != null) {
+                String myUid = loginViewModel.getCurrentUserId();
+                for(Chat chat : chats){
+                    if(chat.getlastMensajeSenderId() != null
+                    && !chat.getlastMensajeSenderId().equals(myUid)
+                    && chat.getlastMensaje() != null
+                    && !chat.getlastMensaje().trim().isEmpty()){
+                        NotificationMessagingService.mostrarNotificacion(
+                                App.this,
+                                chat.getOtherUserName() != null ? chat.getOtherUserName() : "Nuevo Mensaje",
+                                chat.getlastMensaje()
+                        );
+                    }
+                }
+            }
+
+        });
         chatListViewModel.listenToChats(loginViewModel.getCurrentUserId());
 
         chatListViewModel.getErrorMessage().observe(this, error -> {
