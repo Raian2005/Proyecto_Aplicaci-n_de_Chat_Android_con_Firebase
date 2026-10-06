@@ -27,7 +27,8 @@
             android:id="@+id/cardViewProfileChat"
             android:layout_width="75dp"
             android:layout_height="0dp"
-            app:cardCornerRadius="35dp"
+            app:cardCornerRadius="37.5dp"
+            app:cardPreventCornerOverlap="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -36,6 +37,7 @@
                 android:id="@+id/imageViewProfileChat"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/outline_account_circle_24" />
 
         </androidx.cardview.widget.CardView>

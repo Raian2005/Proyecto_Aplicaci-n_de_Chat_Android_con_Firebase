@@ -38,14 +38,14 @@ public class AuthRepositoryImpl implements AuthRepository {
     }
 
     @Override
-    public void register(String name, String email, String password, AuthCallback callback) {
+    public void register(String name, String email, String password, String profileImageBase64, AuthCallback callback) {
         mAuth.createUserWithEmailAndPassword(email, password).
                 addOnCompleteListener(task -> {
                    if(task.isSuccessful()){
                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
                        if(firebaseUser != null){
                            String uid = firebaseUser.getUid();
-                           User user = new User(uid, name, email, "");
+                           User user = new User(uid, name, email, profileImageBase64);
 
                            mFirestore.collection("users").document(uid).set(user)
                                    .addOnSuccessListener(aVoid -> callback.onSuccess(user))

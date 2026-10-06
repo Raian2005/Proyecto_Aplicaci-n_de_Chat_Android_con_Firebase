@@ -57,7 +57,7 @@ public class LoginViewModel extends ViewModel {
         });
     }
 
-    public void register(String name, String email, String password){
+    public void register(String name, String email, String password, String profileImageBase64){
         if(name == null || name.trim().isEmpty() || email == null || email.trim().isEmpty() || password == null || password.trim().isEmpty()){
             errorMessage.setValue("Los campos nombre, email y password son obligatorios");
             return;
@@ -65,7 +65,7 @@ public class LoginViewModel extends ViewModel {
 
         isLoading.setValue(true);
 
-        authRepository.register(name, email, password, new AuthCallback() {
+        authRepository.register(name, email, password, profileImageBase64, new AuthCallback() {
             @Override
             public void onSuccess(User user) {
                 isLoading.setValue(false);

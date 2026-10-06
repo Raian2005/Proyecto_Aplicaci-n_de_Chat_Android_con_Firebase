@@ -1,5 +1,6 @@
 package com.example.projecto_1_chat.presentation.adapter;
 
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.projecto_1_chat.databinding.ItemChatBinding;
 import com.example.projecto_1_chat.domain.model.Chat;
+import com.example.projecto_1_chat.presentation.utils.ImageBase64;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +64,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
                         ? ""
                         : lastMessage
         );
+
+        Bitmap profileImage = ImageBase64.base64ToBitmap(chat.getOtherUserProfileImageUrl());
+        if (profileImage != null) {
+            holder.binding.imageViewProfileChat.setImageBitmap(profileImage);
+        } else {
+            holder.binding.imageViewProfileChat.setImageResource(
+                    com.example.projecto_1_chat.R.drawable.outline_account_circle_24
+            );
+        }
 
         holder.itemView.setOnClickListener(v -> listener.onChatClick(chat));
         holder.binding.constraintItemChat.setOnClickListener(v -> listener.onChatClick(chat));
