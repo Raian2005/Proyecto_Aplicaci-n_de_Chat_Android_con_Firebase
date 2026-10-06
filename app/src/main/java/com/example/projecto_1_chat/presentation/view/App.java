@@ -75,6 +75,7 @@ public class App extends AppCompatActivity {
                     Intent intent = new Intent(App.this, ChatMessage.class);
                     intent.putExtra("chatId", chat.getId());
                     intent.putExtra("otherUserName", chat.getOtherUserName());
+                    intent.putExtra("otherUserProfileImageUrl", chat.getOtherUserProfileImageUrl());
                     startActivity(intent);
                 }
         );

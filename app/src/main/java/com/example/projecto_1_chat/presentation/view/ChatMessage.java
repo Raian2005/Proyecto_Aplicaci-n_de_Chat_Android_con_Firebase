@@ -44,15 +44,27 @@ public class ChatMessage extends AppCompatActivity {
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            Insets ime = insets.getInsets(WindowInsetsCompat.Type.ime());
+            int bottomInset = Math.max(systemBars.bottom, ime.bottom);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, bottomInset);
             return insets;
         });
 
         String chatId = getIntent().getStringExtra("chatId");
         String otherUserName = getIntent().getStringExtra("otherUserName");
+        String otherUserProfileImageUrl = getIntent().getStringExtra("otherUserProfileImageUrl");
 
         if(otherUserName != null){
-            binding.toolbarChatMessage.setTitle(otherUserName);
+            binding.textViewChatTitle.setText(otherUserName);
+        }
+
+        Bitmap profileImage = ImageBase64.base64ToBitmap(otherUserProfileImageUrl);
+        if (profileImage != null) {
+            binding.imageViewChatProfile.setImageBitmap(profileImage);
+        } else {
+            binding.imageViewChatProfile.setImageResource(
+                    com.example.projecto_1_chat.R.drawable.outline_account_circle_24
+            );
         }
 
         loginViewModel = new LoginViewModel();
