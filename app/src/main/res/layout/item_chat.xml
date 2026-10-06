@@ -3,12 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="83dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/background_item_chat">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintItemChat"
         android:layout_width="0dp"
         android:layout_height="75dp"
+        android:layout_margin="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -17,7 +23,7 @@
             android:id="@+id/viewBackgroundItemChat"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="#7BC5C5C5"
+            android:background="@color/chat_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +58,7 @@
             android:fontFamily="sans-serif-black"
             android:text="TextView"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="#000000"
+            android:textColor="?attr/colorOnSurface"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardViewProfileChat"
             app:layout_constraintTop_toTopOf="parent" />
@@ -65,7 +71,7 @@
             android:layout_marginTop="9dp"
             android:layout_marginEnd="16dp"
             android:text="TextView"
-            android:textColor="#98000000"
+            android:textColor="?attr/colorOnSurfaceVariant"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/cardViewProfileChat"
             app:layout_constraintTop_toBottomOf="@+id/textViewNameChat" />
