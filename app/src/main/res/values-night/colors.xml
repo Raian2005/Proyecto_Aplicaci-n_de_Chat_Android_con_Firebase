@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="chat_background">#121212</color>
+    <color name="chat_border">#3A3A3A</color>
+    <color name="message_input_background">#252525</color>
+</resources>

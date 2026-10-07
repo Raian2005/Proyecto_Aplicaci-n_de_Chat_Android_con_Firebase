@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="chat_background">#FFFFFF</color>
+    <color name="chat_border">#D0D0D0</color>
+    <color name="message_input_background">#F5F5F5</color>
 </resources>

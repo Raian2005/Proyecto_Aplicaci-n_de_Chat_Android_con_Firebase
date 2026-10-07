@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,12 +36,22 @@ public class Login extends AppCompatActivity {
             finish();
         }
 
+        androidx.activity.EdgeToEdge.enable(this);
+
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            Insets ime = insets.getInsets(WindowInsetsCompat.Type.ime());
+            int bottomInset = Math.max(systemBars.bottom, ime.bottom);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, bottomInset);
+            return insets;
+        });
+
         Observers();
 
-        binding.buttonLogin.setOnClickListener(v -> {
+        binding.crearChat.setOnClickListener(v -> {
             String email = binding.editTextTextEmailLogin.getText().toString().trim();
             String password = binding.editTextTextPasswordLogin.getText().toString().trim();
 
